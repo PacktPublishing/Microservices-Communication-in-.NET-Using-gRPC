@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Greet;
 using Grpc.Core;
 
 namespace BasicGrpcService
