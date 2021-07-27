@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "StatusMicroservice": {
+      "commandName": "Project",
+      "applicationUrl": "http://localhost:3638;https://localhost:35095",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
