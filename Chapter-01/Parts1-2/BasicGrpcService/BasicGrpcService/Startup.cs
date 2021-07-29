@@ -50,7 +50,7 @@ namespace BasicGrpcService
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<GreeterService>();
+                endpoints.MapGrpcService<GreetingsManagerService>();
                 endpoints.MapRazorPages();
             });
         }

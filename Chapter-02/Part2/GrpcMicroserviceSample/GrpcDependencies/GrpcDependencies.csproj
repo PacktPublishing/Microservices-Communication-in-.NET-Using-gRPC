@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
@@ -12,10 +11,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.34.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\greeter.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\status.proto" />
   </ItemGroup>
 
 </Project>

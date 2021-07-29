@@ -15,6 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\greet.proto" />
+    <Protobuf Include="Protos\greeter.proto" />
   </ItemGroup>
 </Project>
