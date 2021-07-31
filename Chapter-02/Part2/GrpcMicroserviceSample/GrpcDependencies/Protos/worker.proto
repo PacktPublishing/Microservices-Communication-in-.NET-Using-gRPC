@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package worker;
+
+service JobManager {
+  rpc SendJobs (stream SendJobsRequest) returns (SendJobsResponse);
+  rpc TriggerJobs (TriggerJobsRequest) returns (stream TriggerJobsResponse);
+}
+
+message SendJobsRequest {
+    int32 jobId = 1;
+    string jobDescription = 2;
+}
+
+message SendJobsResponse {
+  bool completed = 1;
+}
+
+message TriggerJobsRequest {
+  int32 jobsCount = 1;
+}
+
+message TriggerJobsResponse {
+  int32 jobSequence = 1;
+  string jobMessage = 2;
+}

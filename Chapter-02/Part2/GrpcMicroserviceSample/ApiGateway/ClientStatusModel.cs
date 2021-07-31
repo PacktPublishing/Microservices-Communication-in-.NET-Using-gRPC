@@ -1,4 +1,5 @@
-﻿namespace ApiGateway
+﻿using System;
+namespace ApiGateway
 {
     public class ClientStatusModel
     {

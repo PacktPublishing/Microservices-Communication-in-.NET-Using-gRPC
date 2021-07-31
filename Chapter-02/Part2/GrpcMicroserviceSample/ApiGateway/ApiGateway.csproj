@@ -5,10 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NSwag.AspNetCore" Version="13.12.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\GrpcDependencies\GrpcDependencies.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="NSwag.AspNetCore" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NSwag.AspNetCore" Version="13.12.1" />
   </ItemGroup>
 </Project>

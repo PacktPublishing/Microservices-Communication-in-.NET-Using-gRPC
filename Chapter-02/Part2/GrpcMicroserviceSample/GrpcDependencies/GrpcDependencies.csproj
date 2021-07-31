@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Protobuf Include="Protos\status.proto" />
+    <Protobuf Include="Protos\worker.proto" />
   </ItemGroup>
 
 </Project>
