@@ -32,6 +32,7 @@ namespace StatusMicroservice
             app.UseRouting();
 
             app.UseGrpcWeb();
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {

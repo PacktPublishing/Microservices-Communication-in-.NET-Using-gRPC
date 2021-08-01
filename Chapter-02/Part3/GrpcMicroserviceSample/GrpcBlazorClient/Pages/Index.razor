@@ -31,15 +31,15 @@
     private string clientName = string.Empty;
     private List<string> statuses = new List<string>();
 
-    private void SetStatus(int status)
+    private async Task SetStatus(int status)
     {
-        Client.UpdateClientStatus(clientName, (ClientStatus)status);
-        GetStatuses();
+        await Client.UpdateClientStatus(clientName, (ClientStatus)status);
+        await GetStatuses();
     }
 
-    private void GetStatuses()
+    private async Task GetStatuses()
     {
-        var newStatuses = Client.GetAllStatuses().Result;
+        var newStatuses = await Client.GetAllStatuses();
         statuses = new List<string>();
 
         foreach (var status in newStatuses)

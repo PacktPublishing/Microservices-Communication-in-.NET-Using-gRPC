@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Grpc.Net.Client;
+using Grpc.Net.Client.Web;
 using Status;
 
 namespace GrpcBlazorClient
@@ -21,7 +23,11 @@ namespace GrpcBlazorClient
 
         public GrpcStatusClient(string serverUrl)
         {
-            channel = GrpcChannel.ForAddress(serverUrl);
+            channel = GrpcChannel.ForAddress(serverUrl, new GrpcChannelOptions
+            {
+                HttpHandler = new GrpcWebHandler(new HttpClientHandler())
+            });
+
             client = new StatusManager.StatusManagerClient(channel);
         }
 
