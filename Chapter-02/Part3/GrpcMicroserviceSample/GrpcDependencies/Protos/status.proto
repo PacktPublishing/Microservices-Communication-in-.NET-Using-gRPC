@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package status;
+
+service StatusManager {
+  rpc GetAllStatuses (ClientStatusesRequest) returns (stream ClientStatusResponse);
+  rpc GetClientStatus (ClientStatusRequest) returns (ClientStatusResponse);
+  rpc UpdateClientStatus (ClientStatusUpdateRequest) returns (ClientStatusUpdateResponse);
+}
+
+message ClientStatusesRequest {
+
+}
+
+message ClientStatusRequest {
+  string clientName = 1;
+}
+
+message ClientStatusResponse {
+  string clientName = 1;
+  ClientStatus status = 2;
+}
+
+message ClientStatusUpdateRequest {
+  string clientName = 1;
+  ClientStatus status = 2;
+}
+
+message ClientStatusUpdateResponse {
+  bool success = 1;
+}
+
+enum ClientStatus {
+  OFFLINE = 0;
+  ONLINE = 1;
+  BUSY = 2;  
+}

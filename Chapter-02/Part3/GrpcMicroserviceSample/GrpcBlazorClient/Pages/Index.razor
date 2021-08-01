@@ -1,0 +1,52 @@
+﻿@page "/"
+@inject IGrpcStatusClient Client
+
+<div class="row" style="padding-top: 50px;">
+    <div class="col-md-4">
+        <div>
+            <div>
+                <label for="clientName">Client Name</label>
+                <input @bind="clientName" type="text" id="clientName" name="clientName" />
+            </div>
+            <button @onclick="() => SetStatus(1)" disabled="@(string.IsNullOrWhiteSpace(clientName))" >Set Status Online</button>
+            <button @onclick="() => SetStatus(0)" disabled="@(string.IsNullOrWhiteSpace(clientName))" >Set Status Offline</button>
+            <button @onclick="() => SetStatus(2)" disabled="@(string.IsNullOrWhiteSpace(clientName))" >Set Status Busy</button>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <p>Client Statuses</p>
+        <div>
+            @foreach (var status in statuses)
+            {
+                <div>@status</div>
+            }
+        </div>
+        <button @onclick="GetStatuses">Get All Client Statuses</button>
+    </div>
+</div>
+
+@code {
+
+    private string clientName = string.Empty;
+    private List<string> statuses = new List<string>();
+
+    private void SetStatus(int status)
+    {
+        Client.UpdateClientStatus(clientName, (ClientStatus)status);
+        GetStatuses();
+    }
+
+    private void GetStatuses()
+    {
+        var newStatuses = Client.GetAllStatuses().Result;
+        statuses = new List<string>();
+
+        foreach (var status in newStatuses)
+        {
+            statuses.Add($"Client name: {status.Name}; status: {status.Status}");
+        }
+
+        StateHasChanged();
+    }
+}
