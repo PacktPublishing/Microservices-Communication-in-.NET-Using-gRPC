@@ -37,11 +37,13 @@ message BasicTypes {
   fixed64 fixed_long_field = 8;
   sfixed32 signed_fixed_int_field = 9;
   sfixed64 signed_fixed_long_field = 10;
-  bool booean_fild = 11;
-  string string_field = 12;
-  bytes bytes_field = 13;
-  InternalEnum internal_enum_field = 14;
-  ExternalEnum external_enum_field = 15;
+  float float_field = 11;
+  double double_field = 12;
+  bool booean_fild = 13;
+  string string_field = 14;
+  bytes bytes_field = 15;
+  InternalEnum internal_enum_field = 16;
+  ExternalEnum external_enum_field = 17;
   enum InternalEnum {
     NONE = 0;
     SINGLE = 1;
