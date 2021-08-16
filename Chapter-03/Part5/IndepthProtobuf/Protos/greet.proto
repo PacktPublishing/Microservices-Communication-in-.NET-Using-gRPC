@@ -2,6 +2,9 @@ syntax = "proto3";
 
 option csharp_namespace = "IndepthProtobuf";
 
+import "google/protobuf/any.proto";
+import "Protos/reference.proto";
+
 package greet;
 
 service Greeter {
@@ -21,6 +24,8 @@ message HelloReply {
   BasicTypes.InternalEnum internal_enum_field = 3;
   ExternalEnum extternal_enum_field = 4;
   NestedMessage nested_message_field = 5 [deprecated = true];
+  google.protobuf.Any external_reference_field = 6;
+  greet.reference.ReferenceMessage internal_reference_field = 7;
   message NestedMessage {
     repeated string string_collection = 1;
     repeated int32 int_collection = 2;
