@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+option csharp_namespace = "IndepthProtobuf";
+
+package greet;
+
+service Greeter {
+  rpc SayHello (HelloRequest) returns (HelloReply); // Unary RPC
+  rpc RequestManyHellos (stream HelloRequest) returns (HelloReply); // Client-steraming RPC
+  rpc SayManyHellos (HelloRequest) returns (stream HelloReply); // Server-streamin RPC
+  rpc RequstAndSayManyHellos (stream HelloRequest) returns (stream HelloReply); // Bi-directional streaming RPC
+}
+
+message HelloRequest {
+  string name = 1; // Name of the client to say hello to
+}
+
+message HelloReply {
+  string message = 1;
+  BasicTypes basic_types_field = 2;
+  BasicTypes.InternalEnum internal_enum_field = 3;
+  ExternalEnum extternal_enum_field = 4;
+  NestedMessage nested_message_field = 5 [deprecated = true];
+  message NestedMessage {
+    repeated string string_collection = 1;
+    repeated int32 int_collection = 2;
+    repeated BasicTypes object_collection = 3;
+    repeated ExternalEnum enum_collection = 4;
+    map<string, string> string_to_string_map = 5;
+    map<int64, string> int_to_string_map = 6;
+    map<sfixed32, BasicTypes> signedfixed_to_object_map = 7;
+    map<uint64, ExternalEnum> unsignedint_to_enum_map = 8;
+  }
+}
+
+message BasicTypes {
+  oneof whole_number_field {
+    int32 int_field = 1;
+    int64 long_field = 2;
+    uint32 unsigned_int_filed = 3;
+    uint64 unsigned_long_field = 4;
+    sint32 signed_int_field = 5;
+    sint64 signed_long_field = 6;
+    fixed32 fixed_int_field = 7;
+    fixed64 fixed_long_field = 8;
+    sfixed32 signed_fixed_int_field = 9;
+    sfixed64 signed_fixed_long_field = 10;
+  }
+  oneof mixed_field {
+    float float_field = 11;
+    double double_field = 12;
+    bool booean_fild = 13;
+    string string_field = 14;
+    bytes bytes_field = 15;
+    InternalEnum internal_enum_field = 16;
+    ExternalEnum external_enum_field = 17;
+  }
+  enum InternalEnum {
+    NONE = 0;
+    SINGLE = 1;
+    MANY = 2;
+  }
+}
+
+enum ExternalEnum {
+  option allow_alias = true;
+  NONE = 0;
+  SINGLE = 1;
+  FEW = 2;
+  MANY = 2;
+}

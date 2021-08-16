@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
@@ -17,10 +15,27 @@ namespace IndepthProtobuf
 
         public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
         {
-            return Task.FromResult(new HelloReply
+            var message = new HelloReply
             {
-                Message = "Hello " + request.Name
+                Message = "Hello " + request.Name,
+                NestedMessageField = new HelloReply.Types.NestedMessage()
+            };
+
+            message.NestedMessageField.StringCollection.Add("entry 1");
+            message.NestedMessageField.StringCollection.Add(new List<string>
+            {
+                "entry 2",
+                "entry 3"
             });
+
+            message.NestedMessageField.StringToStringMap.Add("entry 1", "value 1");
+            message.NestedMessageField.StringToStringMap.Add(new Dictionary<string, string>
+            {
+                { "entry 2", "value 2" },
+                { "entry 3", "value 3" }
+            });
+
+            return Task.FromResult(message);
         }
     }
 }
