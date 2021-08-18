@@ -35,6 +35,8 @@ namespace IndepthProtobuf
                 { "entry 3", "value 3" }
             });
 
+            message.NestedMessageField.StringToStringMap["entry 4"] = "value 4";
+
             message.BasicTypesField = new BasicTypes
             {
                 IntField = 1
