@@ -2,6 +2,8 @@
 
 option csharp_namespace = "IndepthProtobuf.Reference";
 
-import public "Protos/new.proto";
-
 package greet.reference;
+
+message ReferenceMessage {
+  string description = 1;
+}
