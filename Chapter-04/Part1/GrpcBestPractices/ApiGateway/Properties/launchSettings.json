@@ -12,7 +12,7 @@
     "ApiGateway": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "swagger",
       "applicationUrl": "https://localhost:36670;http://localhost:24218",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

@@ -25,16 +25,16 @@ namespace ApiGateway.Controllers
             serverUrl = configuration["ServerUrl"];
         }
 
-        [HttpGet("factory-client")]
-        public async Task<ResponseModel> GetPerformanceFromFactoryClient([FromQuery] IEnumerable<string> names)
+        [HttpGet("factory-client/{count}")]
+        public async Task<ResponseModel> GetPerformanceFromFactoryClient(int count)
         {
             var stopWatch = Stopwatch.StartNew();
 
             var response = new ResponseModel();
 
-            foreach (var name in names)
+            for (var i = 0; i < count; i++)
             {
-                var grpcResponse = await factoryClient.GetPerformanceAsync(new PerformanceStatusRequest { ClientName = name });
+                var grpcResponse = await factoryClient.GetPerformanceAsync(new PerformanceStatusRequest { ClientName = $"clinet {i + 1}" });
                 response.PerformanceStatuses.Add(new ResponseModel.PerformanceStatusModel
                 {
                     CpuPercentageUsage = grpcResponse.CpuPercentageUsage,
@@ -49,16 +49,16 @@ namespace ApiGateway.Controllers
             return response;
         }
 
-        [HttpGet("client-wrapper")]
-        public async Task<ResponseModel> GetPerformanceFromClientWrapper([FromQuery] IEnumerable<string> names)
+        [HttpGet("client-wrapper/{count}")]
+        public async Task<ResponseModel> GetPerformanceFromClientWrapper(int count)
         {
             var stopWatch = Stopwatch.StartNew();
 
             var response = new ResponseModel();
 
-            foreach (var name in names)
+            for (var i = 0; i < count; i++)
             {
-                var grpcResponse = await clientWrapper.GetPerformanceStatus(name);
+                var grpcResponse = await clientWrapper.GetPerformanceStatus($"clinet {i + 1}");
                 response.PerformanceStatuses.Add(new ResponseModel.PerformanceStatusModel
                 {
                     CpuPercentageUsage = grpcResponse.CpuPercentageUsage,
@@ -73,20 +73,20 @@ namespace ApiGateway.Controllers
             return response;
         }
 
-        [HttpGet("initialized-client")]
-        public async Task<ResponseModel> GetPerformanceFromNewClient([FromQuery] IEnumerable<string> names)
+        [HttpGet("initialized-client/{count}")]
+        public async Task<ResponseModel> GetPerformanceFromNewClient(int count)
         {
             var stopWatch = Stopwatch.StartNew();
 
             var response = new ResponseModel();
 
-            foreach (var name in names)
+            for (var i = 0; i < count; i++)
             {
                 using (var channel = GrpcChannel.ForAddress(serverUrl))
                 {
                     var client = new Monitor.MonitorClient(channel);
 
-                    var grpcResponse = await client.GetPerformanceAsync(new PerformanceStatusRequest { ClientName = name });
+                    var grpcResponse = await client.GetPerformanceAsync(new PerformanceStatusRequest { ClientName = $"clinet {i + 1}" });
                     response.PerformanceStatuses.Add(new ResponseModel.PerformanceStatusModel
                     {
                         CpuPercentageUsage = grpcResponse.CpuPercentageUsage,

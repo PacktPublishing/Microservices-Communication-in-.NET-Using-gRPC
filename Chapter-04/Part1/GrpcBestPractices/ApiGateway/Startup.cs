@@ -26,7 +26,7 @@ namespace ApiGateway
             services.AddGrpcClient<Monitor.MonitorClient>(o =>
             {
                 o.Address = new Uri(Configuration["ServerUrl"]);
-            });
+            });       
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
