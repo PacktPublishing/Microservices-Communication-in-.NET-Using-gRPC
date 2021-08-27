@@ -82,19 +82,44 @@ namespace ApiGateway.Controllers
 
             for (var i = 0; i < count; i++)
             {
-                using (var channel = GrpcChannel.ForAddress(serverUrl))
-                {
-                    var client = new Monitor.MonitorClient(channel);
+                using var channel = GrpcChannel.ForAddress(serverUrl);
+                var client = new Monitor.MonitorClient(channel);
 
-                    var grpcResponse = await client.GetPerformanceAsync(new PerformanceStatusRequest { ClientName = $"clinet {i + 1}" });
-                    response.PerformanceStatuses.Add(new ResponseModel.PerformanceStatusModel
-                    {
-                        CpuPercentageUsage = grpcResponse.CpuPercentageUsage,
-                        MemoryUsage = grpcResponse.MemoryUsage,
-                        ProcessesRunning = grpcResponse.ProcessesRunning,
-                        ActiveConnections = grpcResponse.ActiveConnections
-                    });
-                }
+                var grpcResponse = await client.GetPerformanceAsync(new PerformanceStatusRequest { ClientName = $"clinet {i + 1}" });
+                response.PerformanceStatuses.Add(new ResponseModel.PerformanceStatusModel
+                {
+                    CpuPercentageUsage = grpcResponse.CpuPercentageUsage,
+                    MemoryUsage = grpcResponse.MemoryUsage,
+                    ProcessesRunning = grpcResponse.ProcessesRunning,
+                    ActiveConnections = grpcResponse.ActiveConnections
+                });
+            }
+
+            response.RequestProcessingTime = stopWatch.ElapsedMilliseconds;
+
+            return response;
+        }
+
+        [HttpGet("initialized-client/{count}")]
+        public async Task<ResponseModel> Get(int count)
+        {
+            var stopWatch = Stopwatch.StartNew();
+
+            var response = new ResponseModel();
+
+            for (var i = 0; i < count; i++)
+            {
+                using var channel = GrpcChannel.ForAddress(serverUrl);
+                var client = new Monitor.MonitorClient(channel);
+
+                var grpcResponse = await client.GetPerformanceAsync(new PerformanceStatusRequest { ClientName = $"clinet {i + 1}" });
+                response.PerformanceStatuses.Add(new ResponseModel.PerformanceStatusModel
+                {
+                    CpuPercentageUsage = grpcResponse.CpuPercentageUsage,
+                    MemoryUsage = grpcResponse.MemoryUsage,
+                    ProcessesRunning = grpcResponse.ProcessesRunning,
+                    ActiveConnections = grpcResponse.ActiveConnections
+                });
             }
 
             response.RequestProcessingTime = stopWatch.ElapsedMilliseconds;

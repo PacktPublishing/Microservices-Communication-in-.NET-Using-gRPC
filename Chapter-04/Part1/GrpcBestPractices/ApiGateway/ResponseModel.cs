@@ -4,7 +4,7 @@ namespace ApiGateway
 {
     public class ResponseModel
     {
-        public List<PerformanceStatusModel> PerformanceStatuses = new();
+        public List<PerformanceStatusModel> PerformanceStatuses { get; } = new();
         public double RequestProcessingTime { get; set; }
 
         public class PerformanceStatusModel
