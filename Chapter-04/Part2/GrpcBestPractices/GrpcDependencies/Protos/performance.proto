@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+
+package performance;
+
+service Monitor {
+  rpc GetPerformance (PerformanceStatusRequest) returns (PerformanceStatusResponse);
+}
+
+message PerformanceStatusRequest {
+  string client_name = 1;
+}
+
+message PerformanceStatusResponse {
+    double cpu_percentage_usage = 1;
+    double memory_usage = 2;
+    int32 processes_running = 3;
+    int32 active_connections = 4;
+}
