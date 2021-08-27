@@ -59,13 +59,7 @@ namespace ApiGateway.Controllers
             for (var i = 0; i < count; i++)
             {
                 var grpcResponse = await clientWrapper.GetPerformanceStatus($"clinet {i + 1}");
-                response.PerformanceStatuses.Add(new ResponseModel.PerformanceStatusModel
-                {
-                    CpuPercentageUsage = grpcResponse.CpuPercentageUsage,
-                    MemoryUsage = grpcResponse.MemoryUsage,
-                    ProcessesRunning = grpcResponse.ProcessesRunning,
-                    ActiveConnections = grpcResponse.ActiveConnections
-                });
+                response.PerformanceStatuses.Add(grpcResponse);
             }
 
             response.RequestProcessingTime = stopWatch.ElapsedMilliseconds;

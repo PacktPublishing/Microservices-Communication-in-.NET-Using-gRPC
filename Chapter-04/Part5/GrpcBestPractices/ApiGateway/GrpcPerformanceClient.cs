@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Grpc.Net.Client;
@@ -31,13 +32,7 @@ namespace ApiGateway
                 ClientName = clientName
             });
 
-            return new ResponseModel.PerformanceStatusModel
-            {
-                CpuPercentageUsage = response.CpuPercentageUsage,
-                MemoryUsage = response.MemoryUsage,
-                ProcessesRunning = response.ProcessesRunning,
-                ActiveConnections = response.ActiveConnections
-            };
+            return ReadResponse(response);
         }
 
         public void Dispose()
@@ -57,13 +52,7 @@ namespace ApiGateway
             {
                 await foreach (var response in call.ResponseStream.ReadAllAsync())
                 {
-                    responses.Add(new ResponseModel.PerformanceStatusModel
-                    {
-                        CpuPercentageUsage = response.CpuPercentageUsage,
-                        MemoryUsage = response.MemoryUsage,
-                        ProcessesRunning = response.ProcessesRunning,
-                        ActiveConnections = response.ActiveConnections
-                    });
+                    responses.Add(ReadResponse(response));
                 }
             });
 
@@ -79,6 +68,19 @@ namespace ApiGateway
             await readTask;
 
             return responses;
+        }
+
+        private ResponseModel.PerformanceStatusModel ReadResponse(PerformanceStatusResponse response)
+        {
+            return new ResponseModel.PerformanceStatusModel
+            {
+                CpuPercentageUsage = response.CpuPercentageUsage,
+                MemoryUsage = response.MemoryUsage,
+                ProcessesRunning = response.ProcessesRunning,
+                ActiveConnections = response.ActiveConnections,
+                DatLoad1 = response.DataLoad1.ToByteArray(),
+                DatLoad2 = MemoryMarshal.TryGetArray(response.DataLoad2.Memory, out var segment) ? segment.Array : response.DataLoad2.Memory.ToArray()
+            };
         }
     }
 }
