@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Grpc.AspNetCore" Version="2.34.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\GrpcDependencies\GrpcDependencies.csproj" />
   </ItemGroup>
 </Project>
