@@ -11,10 +11,5 @@
   <ItemGroup>
     <ProjectReference Include="..\GrpcDependencies\GrpcDependencies.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="Controllers\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+
 </Project>
