@@ -1,0 +1,24 @@
+﻿syntax = "proto3";
+
+package stats;
+
+service Status {
+  rpc GetStatus (StatusRequest) returns (StatusResponse);
+}
+
+message StatusRequest {
+  string client_name = 1;
+  string client_description = 2;
+  bool authorized = 4;
+}
+
+message StatusResponse {
+  string server_name = 1;
+  string server_description = 2;
+  int32 number_of_connections = 3;
+  double cpu_usage = 4;
+  double memory_usage = 5;
+  uint64 errors_logged = 6;
+  uint32 catastrophic_failures_logged = 7;
+  bool active = 8;  
+}
