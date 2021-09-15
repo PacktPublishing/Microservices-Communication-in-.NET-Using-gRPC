@@ -1,6 +1,6 @@
 ﻿syntax = "proto3";
 
-package stats;
+package stats.v1;
 
 service Status {
   rpc GetStatus (StatusRequest) returns (StatusResponse);

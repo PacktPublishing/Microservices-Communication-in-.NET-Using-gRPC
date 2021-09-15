@@ -20,6 +20,6 @@ message StatusResponse {
   double cpu_usage = 4;
   double memory_usage = 5;
   uint64 errors_logged = 6 [deprecated = true];
-  uint32 catastrophic_failures_logged = 7 [deprecated = true];
+  uint32 catastrophic_failures_logged = 7;
   bool active = 8 [deprecated = true];
 }

@@ -24,7 +24,8 @@ namespace GrpcServer
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<StatusService>();
+                endpoints.MapGrpcService<StatusServiceV1>();
+                endpoints.MapGrpcService<StatusServiceV2>();
 
                 endpoints.MapGet("/", async context =>
                 {

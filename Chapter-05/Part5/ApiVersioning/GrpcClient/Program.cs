@@ -11,7 +11,7 @@ namespace GrpcClient
             Console.WriteLine("Please enter gRPC server address:");
             var serverUrl = Console.ReadLine();
 
-            var client = new Stats.Status.StatusClient(GrpcChannel.ForAddress(serverUrl));
+            var client = new Stats.V1.Status.StatusClient(GrpcChannel.ForAddress(serverUrl));
 
             Console.WriteLine("Please enter client name:");
             var clientName = Console.ReadLine();
@@ -19,7 +19,7 @@ namespace GrpcClient
             Console.WriteLine("Please enter client description:");
             var clientDescription = Console.ReadLine();
 
-            var response = await client.GetStatusAsync(new Stats.StatusRequest
+            var response = await client.GetStatusAsync(new Stats.V1.StatusRequest
             {
                 ClientName = clientName,
                 ClientDescription = clientDescription,

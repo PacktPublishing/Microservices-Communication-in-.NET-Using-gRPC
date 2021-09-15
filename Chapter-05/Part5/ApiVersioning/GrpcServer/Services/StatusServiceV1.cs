@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Grpc.Core;
-using Stats.V2;
+using Stats.V1;
 
 namespace GrpcServer
 {
-    public class StatusService : Stats.V2.Status.StatusBase
+    public class StatusServiceV1 : Stats.V1.Status.StatusBase
     {
         public override Task<StatusResponse> GetStatus(StatusRequest request, ServerCallContext context)
         {
@@ -19,10 +19,13 @@ namespace GrpcServer
             return Task.FromResult(new StatusResponse
             {
                 ServerName = "TestServer",
+                ServerDescription = "This is a test server that is used for generating status metrics",
                 NumberOfConnections = randomNumberGenerator.Next(),
                 CpuUsage = randomNumberGenerator.NextDouble() * 100,
                 MemoryUsage = randomNumberGenerator.NextDouble() * 100,
-                CatastrophicFailuresLogged = (uint)randomNumberGenerator.Next()
+                ErrorsLogged = (ulong)randomNumberGenerator.Next(),
+                CatastrophicFailuresLogged = (uint)randomNumberGenerator.Next(),
+                Active = true
             });
         }
     }
