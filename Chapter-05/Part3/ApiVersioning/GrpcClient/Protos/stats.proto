@@ -9,16 +9,16 @@ service Status {
 message StatusRequest {
   string client_name = 1;
   string client_description = 2;
-  bool authorized = 4;
+  bool allowed = 4;
 }
 
 message StatusResponse {
   string server_name = 1;
   string server_description = 2;
-  int32 number_of_connections = 3;
+  uint32 number_of_connections = 3;
   double cpu_usage = 4;
   double memory_usage = 5;
-  uint64 errors_logged = 6;
-  uint32 catastrophic_failures_logged = 7;
+  int32 errors_logged = 6;
+  int32 catastrophic_failures_logged = 7;
   bool active = 8;  
 }
