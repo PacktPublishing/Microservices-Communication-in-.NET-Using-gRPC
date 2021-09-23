@@ -8,7 +8,7 @@ namespace ApiGateway.Controllers
     [Route("[controller]")]
     public class DataController : ControllerBase
     {
-        private IGrpcClientWrapper clientWrapper;
+        private readonly IGrpcClientWrapper clientWrapper;
 
         public DataController(IGrpcClientWrapper clientWrapper)
         {

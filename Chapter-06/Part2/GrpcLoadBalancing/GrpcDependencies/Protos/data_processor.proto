@@ -1,0 +1,17 @@
+﻿syntax = "proto3";
+
+package data_processor;
+
+service Ingestor {
+    rpc ProcessData (DataRequest) returns (DataResponse);
+}
+
+message DataRequest {
+    int32 id = 1;
+    string name = 2;
+    string description = 3;
+}
+
+message DataResponse {
+    bool success = 1;
+}

@@ -1,0 +1,2 @@
+﻿localhost 6992
+localhost 46785

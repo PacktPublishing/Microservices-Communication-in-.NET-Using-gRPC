@@ -60,7 +60,12 @@ namespace ApiGateway
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            standardChannel.Dispose();
+
+            foreach (var channel in roundRobinChannels)
+            {
+                channel.Dispose();
+            }
         }
 
         private int GetCurrentChannelIndex()

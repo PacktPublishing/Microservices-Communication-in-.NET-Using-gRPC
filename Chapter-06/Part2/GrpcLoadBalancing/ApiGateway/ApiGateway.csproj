@@ -12,4 +12,9 @@
     <ProjectReference Include="..\GrpcDependencies\GrpcDependencies.csproj" />
   </ItemGroup>
   
+  <ItemGroup>
+    <None Update="addresses.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
