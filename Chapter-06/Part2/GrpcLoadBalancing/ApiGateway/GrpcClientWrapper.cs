@@ -72,7 +72,7 @@ namespace ApiGateway
         {
             using var channel = GrpcChannel.ForAddress("dns://myhost", new GrpcChannelOptions
             {
-                Credentials = ChannelCredentials.Insecure,
+                Credentials = ChannelCredentials.SecureSsl,
                 ServiceProvider = serviceProvider,
                 ServiceConfig = new ServiceConfig { LoadBalancingConfigs = { new PickFirstConfig() } }
             });
@@ -93,7 +93,7 @@ namespace ApiGateway
         {
             using var channel = GrpcChannel.ForAddress("static://localhost", new GrpcChannelOptions
             {
-                Credentials = ChannelCredentials.Insecure,
+                Credentials = ChannelCredentials.SecureSsl,
                 ServiceProvider = serviceProvider,
                 ServiceConfig = new ServiceConfig { LoadBalancingConfigs = { new RoundRobinConfig() } }
             });
@@ -114,7 +114,7 @@ namespace ApiGateway
         {
             using var channel = GrpcChannel.ForAddress("disk://addresses.txt", new GrpcChannelOptions
             {
-                Credentials = ChannelCredentials.Insecure,
+                Credentials = ChannelCredentials.SecureSsl,
                 ServiceProvider = serviceProvider,
                 ServiceConfig = new ServiceConfig { LoadBalancingConfigs = { new LoadBalancingConfig("random") } }
             });
