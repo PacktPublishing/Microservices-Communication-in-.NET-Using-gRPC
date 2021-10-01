@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.810.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcDependencies", "GrpcDependencies\GrpcDependencies.csproj", "{F7DF1BFB-09C7-41EC-B5F6-31FFD1A2DA97}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcServerCommon", "GrpcServerCommon\GrpcServerCommon.csproj", "{D9FDEA00-21E8-4DEA-ADDA-19C571066F07}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcServer1", "GrpcServer1\GrpcServer1.csproj", "{4DC642F5-2FA3-4917-878C-85FBA0A93E10}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcServer2", "GrpcServer2\GrpcServer2.csproj", "{9AB94060-D753-4EE3-8D1F-BB9800AD75CB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{75B2A93C-889A-4B55-8826-F4AE8A508FE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Http2Proxy", "Http2Proxy\Http2Proxy.csproj", "{EB9715DE-6F05-4959-995C-06D5DCEEB4D6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F7DF1BFB-09C7-41EC-B5F6-31FFD1A2DA97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7DF1BFB-09C7-41EC-B5F6-31FFD1A2DA97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7DF1BFB-09C7-41EC-B5F6-31FFD1A2DA97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7DF1BFB-09C7-41EC-B5F6-31FFD1A2DA97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9FDEA00-21E8-4DEA-ADDA-19C571066F07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9FDEA00-21E8-4DEA-ADDA-19C571066F07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9FDEA00-21E8-4DEA-ADDA-19C571066F07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9FDEA00-21E8-4DEA-ADDA-19C571066F07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DC642F5-2FA3-4917-878C-85FBA0A93E10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DC642F5-2FA3-4917-878C-85FBA0A93E10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DC642F5-2FA3-4917-878C-85FBA0A93E10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DC642F5-2FA3-4917-878C-85FBA0A93E10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AB94060-D753-4EE3-8D1F-BB9800AD75CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AB94060-D753-4EE3-8D1F-BB9800AD75CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AB94060-D753-4EE3-8D1F-BB9800AD75CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AB94060-D753-4EE3-8D1F-BB9800AD75CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75B2A93C-889A-4B55-8826-F4AE8A508FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75B2A93C-889A-4B55-8826-F4AE8A508FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75B2A93C-889A-4B55-8826-F4AE8A508FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75B2A93C-889A-4B55-8826-F4AE8A508FE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB9715DE-6F05-4959-995C-06D5DCEEB4D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB9715DE-6F05-4959-995C-06D5DCEEB4D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB9715DE-6F05-4959-995C-06D5DCEEB4D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB9715DE-6F05-4959-995C-06D5DCEEB4D6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B930536B-F867-4E43-BAB5-26CA299B24E2}
+	EndGlobalSection
+EndGlobal
