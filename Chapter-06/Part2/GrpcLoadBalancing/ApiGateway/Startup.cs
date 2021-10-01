@@ -23,9 +23,9 @@ namespace ApiGateway
         {
             services.AddControllers();
             services.AddOpenApiDocument();
-            var addresses = Configuration.GetSection("ServerAddresses").Get<List<string>>();
             services.AddSingleton(Configuration);
             services.AddSingleton<IGrpcClientWrapper, GrpcClientWrapper>();
+            var addresses = Configuration.GetSection("ServerAddresses").Get<List<string>>();  
             services.AddSingleton<ResolverFactory>
                 (new StaticResolverFactory(addr => addresses
                     .Select(a => new DnsEndPoint(a.Replace("//", string.Empty).Split(':')[1], int.Parse(a.Split(':')[2])))

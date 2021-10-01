@@ -39,11 +39,11 @@ namespace GrpcBlazorClient
 
             while (await call.ResponseStream.MoveNext())
             {
-                var currentStatuse = call.ResponseStream.Current;
+                var currentStatus = call.ResponseStream.Current;
                 statuses.Add(new ClientStatusModel
                 {
-                    Name = currentStatuse.ClientName,
-                    Status = (ClientStatus)currentStatuse.Status
+                    Name = currentStatus.ClientName,
+                    Status = (ClientStatus)currentStatus.Status
                 });
             }
 

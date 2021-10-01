@@ -15,7 +15,7 @@ namespace ApiGateway.Controllers
         }
 
         [HttpPost("")]
-        public void SenJobs([FromBody] IEnumerable<JobModel> jobs)
+        public void SendJobs([FromBody] IEnumerable<JobModel> jobs)
         {
             _ = client.SendJobs(jobs);
 

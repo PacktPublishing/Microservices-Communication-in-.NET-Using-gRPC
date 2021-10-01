@@ -38,7 +38,7 @@ namespace ApiGateway
             }
             await call.RequestStream.CompleteAsync();
 
-            var response = await call;
+            await call;
         }
 
         public async Task TriggerJobs(int jobCount)
