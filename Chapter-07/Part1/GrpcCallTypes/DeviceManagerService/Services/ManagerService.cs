@@ -8,7 +8,7 @@ namespace DeviceManagerService.Services
     {
         public override Task<DeviceManagement.UpsertDeviceResponse> UpsertDeviceStatus(DeviceManagement.DeviceDetails request, ServerCallContext context)
         {
-            Console.WriteLine("DeviceManagerService triggered.");
+            Console.WriteLine($"DeviceManagerService triggered. Peer: {context.Peer}. Host: {context.Host}.");
             Console.WriteLine($"Device id: {request.DeviceId}, Name: {request.Name}, Description: {request.Description}, Status {request.Status}.");
 
             return Task.FromResult(new DeviceManagement.UpsertDeviceResponse
