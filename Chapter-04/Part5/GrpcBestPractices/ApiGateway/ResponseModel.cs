@@ -13,8 +13,8 @@ namespace ApiGateway
             public double MemoryUsage { get; set; }
             public int ProcessesRunning { get; set; }
             public int ActiveConnections { get; set; }
-            public byte[] DatLoad1 { get; set; }
-            public byte[] DatLoad2 { get; set; }
+            public byte[] DataLoad1 { get; set; }
+            public byte[] DataLoad2 { get; set; }
         }
     }
 }

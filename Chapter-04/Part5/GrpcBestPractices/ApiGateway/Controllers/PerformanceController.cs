@@ -34,7 +34,7 @@ namespace ApiGateway.Controllers
 
             for (var i = 0; i < count; i++)
             {
-                var grpcResponse = await factoryClient.GetPerformanceAsync(new PerformanceStatusRequest { ClientName = $"clinet {i + 1}" });
+                var grpcResponse = await factoryClient.GetPerformanceAsync(new PerformanceStatusRequest { ClientName = $"client {i + 1}" });
                 response.PerformanceStatuses.Add(new ResponseModel.PerformanceStatusModel
                 {
                     CpuPercentageUsage = grpcResponse.CpuPercentageUsage,
@@ -58,7 +58,7 @@ namespace ApiGateway.Controllers
 
             for (var i = 0; i < count; i++)
             {
-                var grpcResponse = await clientWrapper.GetPerformanceStatus($"clinet {i + 1}");
+                var grpcResponse = await clientWrapper.GetPerformanceStatus($"client {i + 1}");
                 response.PerformanceStatuses.Add(grpcResponse);
             }
 
@@ -79,7 +79,7 @@ namespace ApiGateway.Controllers
                 using var channel = GrpcChannel.ForAddress(serverUrl);
                 var client = new Monitor.MonitorClient(channel);
 
-                var grpcResponse = await client.GetPerformanceAsync(new PerformanceStatusRequest { ClientName = $"clinet {i + 1}" });
+                var grpcResponse = await client.GetPerformanceAsync(new PerformanceStatusRequest { ClientName = $"client {i + 1}" });
                 response.PerformanceStatuses.Add(new ResponseModel.PerformanceStatusModel
                 {
                     CpuPercentageUsage = grpcResponse.CpuPercentageUsage,
@@ -105,7 +105,7 @@ namespace ApiGateway.Controllers
 
             for (var i = 0; i < count; i++)
             {
-                clientNames.Add($"clinet {i + 1}");
+                clientNames.Add($"client {i + 1}");
             }
 
             response.PerformanceStatuses.AddRange(await clientWrapper.GetPerformanceStatuses(clientNames));

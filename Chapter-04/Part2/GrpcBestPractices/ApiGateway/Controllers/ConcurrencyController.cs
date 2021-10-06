@@ -35,7 +35,7 @@ namespace ApiGateway.Controllers
                 var client = new Monitor.MonitorClient(channel);
                 concurrentJobs.Add(Task.Run(() =>
                 {
-                    client.GetPerformance(new PerformanceStatusRequest { ClientName = $"clinet {i + 1}" });
+                    client.GetPerformance(new PerformanceStatusRequest { ClientName = $"client {i + 1}" });
                 }));
             }
 
@@ -66,7 +66,7 @@ namespace ApiGateway.Controllers
                 concurrentJobs.Add(Task.Run(() =>
                 {
                     var client = new Monitor.MonitorClient(channel);
-                    client.GetPerformance(new PerformanceStatusRequest { ClientName = $"clinet {i + 1}" });
+                    client.GetPerformance(new PerformanceStatusRequest { ClientName = $"client {i + 1}" });
                 }));
             }
 

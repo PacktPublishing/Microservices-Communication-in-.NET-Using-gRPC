@@ -1,0 +1,30 @@
+﻿syntax = "proto3";
+
+package device_management;
+
+service DeviceManager {
+    rpc UpsertDeviceStatus (DeviceDetails) returns (UpsertDeviceResponse);
+    rpc GetDevice (GetDeviceRequest) returns (DeviceDetails);
+}
+
+message DeviceDetails {
+    int32 device_id = 1;
+    string name = 2;
+    string description = 3;
+    DeviceStatus status = 4; 
+}
+
+message GetDeviceRequest {
+    int32 device_id = 1;
+}
+
+message UpsertDeviceResponse {
+    bool success = 1;
+}
+
+enum DeviceStatus {
+    OFFLINE = 0;
+    ONLINE = 1;
+    BUSY = 2;
+    ERRORED = 3;
+}
