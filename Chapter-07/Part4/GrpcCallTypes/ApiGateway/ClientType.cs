@@ -2,8 +2,8 @@
 {
     public enum ClientType
     {
-        PackageName,
-        NoPackage,
-        CsNamespace
+        PackageName = 0,
+        NoPackage = 1,
+        CsNamespace = 2
     }
 }
