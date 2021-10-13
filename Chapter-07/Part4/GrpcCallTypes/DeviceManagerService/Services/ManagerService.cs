@@ -45,7 +45,7 @@ namespace DeviceManagerService.Services
         {
             foreach (var device in deviceStatusCache.GetAllDeviceDetails())
             {
-                if (DateTime.Now.AddSeconds(1) > context.Deadline)
+                if (DateTime.UtcNow.AddSeconds(1) > context.Deadline)
                     break;
 
                 await responseStream.WriteAsync(device);

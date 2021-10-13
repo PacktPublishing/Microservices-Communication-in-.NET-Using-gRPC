@@ -156,7 +156,7 @@ namespace ApiGateway
         public async Task<IEnumerable<DeviceDetails>> GetAllDevices(int deadlineSeconds = 0)
         {
             var client = new DeviceManagement.DeviceManager.DeviceManagerClient(channel);
-            DateTime? deadline = deadlineSeconds > 0 ? DateTime.Now.AddSeconds(deadlineSeconds) : null;
+            DateTime? deadline = deadlineSeconds > 0 ? DateTime.UtcNow.AddSeconds(deadlineSeconds) : null;
             var call = client.GetAllStatuses(new Empty(), deadline: deadline);
 
             var devices = new List<DeviceDetails>();
