@@ -42,5 +42,20 @@ namespace GrpcServiceApp
 
             return Task.FromResult(new HelloReply());
         }
+
+        public override Task<MessageCount> GetMessageProcessedCount(Empty request, ServerCallContext context)
+        {
+            return Task.FromResult(new MessageCount
+            {
+               Count = counter.GetCurrentCount()
+            });
+        }
+
+        public override Task<Empty> SynchronizeMessageCount(MessageCount request, ServerCallContext context)
+        {
+            counter.UpdateCount(request.Count);
+
+            return Task.FromResult(new Empty());
+        }
     }
 }
