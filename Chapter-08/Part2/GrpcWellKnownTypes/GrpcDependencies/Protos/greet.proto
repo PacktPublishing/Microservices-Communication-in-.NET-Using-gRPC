@@ -1,6 +1,7 @@
 ﻿syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
 
 option csharp_namespace = "GrpcServiceApp";
 
@@ -8,6 +9,8 @@ package greet;
 
 service Greeter {
   rpc SayHello (HelloRequest) returns (HelloReply);
+  rpc GetMessageProcessedCount (google.protobuf.Empty) returns (MessageCount);
+  rpc SynchronizeMessageCount (MessageCount) returns (google.protobuf.Empty);
 }
 
 message HelloRequest {
@@ -19,9 +22,13 @@ message HelloReply {
   google.protobuf.UInt32Value message_processed_count = 2;
   google.protobuf.UInt64Value message_length_in_bytes = 3;
   google.protobuf.Int32Value message_length_in_letters = 4;
-  google.protobuf.Int64Value processing_duration_miliseconds = 5;
-  google.protobuf.FloatValue processing_duration_seconds = 6;
-  google.protobuf.DoubleValue processing_duration_minutes = 7;
+  google.protobuf.Int64Value milliseconds_to_deadline = 5;
+  google.protobuf.FloatValue seconds_to_deadline = 6;
+  google.protobuf.DoubleValue minutes_to_deadline = 7;
   google.protobuf.BoolValue last_name_present = 8;
   google.protobuf.BytesValue message_bytes = 9;
+}
+
+message MessageCount {
+  uint32 count = 1;
 }
