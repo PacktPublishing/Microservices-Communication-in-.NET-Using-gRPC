@@ -1,0 +1,53 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+
+option csharp_namespace = "GrpcServiceApp";
+
+package greet;
+
+service Greeter {
+  rpc SayHello (HelloRequest) returns (HelloReply);
+  rpc GetMessageProcessedCount (google.protobuf.Empty) returns (MessageCount);
+  rpc SynchronizeMessageCount (MessageCount) returns (google.protobuf.Empty);
+}
+
+message HelloRequest {
+  string name = 1;
+  google.protobuf.Timestamp request_time_utc = 2;
+  google.protobuf.Any payload = 3;
+}
+
+message HelloReply {
+  google.protobuf.StringValue message = 1;
+  google.protobuf.UInt32Value message_processed_count = 2;
+  google.protobuf.UInt64Value message_length_in_bytes = 3;
+  google.protobuf.Int32Value message_length_in_letters = 4;
+  google.protobuf.Int64Value milliseconds_to_deadline = 5;
+  google.protobuf.FloatValue seconds_to_deadline = 6;
+  google.protobuf.DoubleValue minutes_to_deadline = 7;
+  google.protobuf.BoolValue last_name_present = 8;
+  google.protobuf.BytesValue message_bytes = 9;
+  google.protobuf.Timestamp response_time_utc = 10;
+  google.protobuf.Duration call_processing_duration = 11;
+}
+
+message MessageCount {
+  uint32 count = 1;
+}
+
+message IntegerPayload {
+  uint32 value = 1;
+}
+
+message DoublePayload {
+  double value = 1;
+}
+
+message BooleanPayload {
+  bool value = 1;
+}
