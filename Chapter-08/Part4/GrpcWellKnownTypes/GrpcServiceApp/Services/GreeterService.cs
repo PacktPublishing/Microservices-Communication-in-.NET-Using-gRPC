@@ -17,11 +17,11 @@ namespace GrpcServiceApp
 
         public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
         {
-            Console.WriteLine($"Payload type is: {request?.Payload.TypeUrl ?? "No payload provided"}");
+            Console.WriteLine($"Payload type is: {request.Payload?.TypeUrl ?? "No payload provided"}");
 
-            var payloadExtracted = false;
+            var payloadExtracted = request.Payload is null;
 
-            if (request.Payload.TryUnpack<IntegerPayload>(out var integerPayload))
+            if (!payloadExtracted && request.Payload.TryUnpack<IntegerPayload>(out var integerPayload))
             {
                 Console.WriteLine($"Extracted the following integer value from the payload: {integerPayload.Value}" );
                 payloadExtracted = true;
