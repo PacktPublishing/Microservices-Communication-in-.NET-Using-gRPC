@@ -37,7 +37,7 @@ namespace GrpcClient
                 Console.WriteLine("Call processing duration: " + reply.CallProcessingDuration);
                 Console.WriteLine("Response time UTC: " + reply.ResponseTimeUtc);
 
-                Console.WriteLine("Press Enter to continue and Escape to exit.");
+                Console.WriteLine("Press Enter to continue or Escape to exit.");
                 proceed = Console.ReadKey().Key != ConsoleKey.Escape;
             }
 

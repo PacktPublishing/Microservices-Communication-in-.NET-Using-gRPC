@@ -33,7 +33,7 @@ namespace GrpcClient
                 Console.WriteLine("Last name present: " + reply.LastNamePresent);
                 Console.WriteLine("Message bytes: " + reply.MessageBytes);
 
-                Console.WriteLine("Press Enter to continue and Escape to exit.");
+                Console.WriteLine("Press Enter to continue or Escape to exit.");
                 proceed = Console.ReadKey().Key != ConsoleKey.Escape;
             }
 
