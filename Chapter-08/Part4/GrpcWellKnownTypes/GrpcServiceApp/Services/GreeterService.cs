@@ -21,21 +21,45 @@ namespace GrpcServiceApp
 
             var payloadExtracted = request.Payload is null;
 
-            if (!payloadExtracted && request.Payload.TryUnpack<IntegerPayload>(out var integerPayload))
+            if (!payloadExtracted && request.Payload.Is(IntegerPayload.Descriptor))
             {
-                Console.WriteLine($"Extracted the following integer value from the payload: {integerPayload.Value}" );
+                Console.WriteLine($"Extracted the following integer value from the payload: {request.Payload.Unpack<IntegerPayload>().Value}" );
+                Console.WriteLine($"Extracted the following integer value from the additional payload: {Convert.ToInt32(request.AdditionalPayload.NumberValue)}");
                 payloadExtracted = true;
             }
 
             if (!payloadExtracted && request.Payload.TryUnpack<DoublePayload>(out var doublePayload))
             {
                 Console.WriteLine($"Extracted the following double value from the payload: {doublePayload.Value}");
+                Console.WriteLine($"Extracted the following double value from the additional payload: {request.AdditionalPayload.NumberValue}");
                 payloadExtracted = true;
             }
 
             if (!payloadExtracted && request.Payload.TryUnpack<BooleanPayload>(out var booleanPayload))
             {
                 Console.WriteLine($"Extracted the following Boolean value from the payload: {booleanPayload.Value}");
+                Console.WriteLine($"Extracted the following Boolean value from the additional payload: {request.AdditionalPayload.BoolValue}");
+            }
+
+            if (!payloadExtracted && request.Payload.Is(CollectionPayload.Descriptor))
+            {
+                var primaryPayload = request.Payload.Unpack<CollectionPayload>();
+                var secondaryPayload = request.AdditionalPayload.StructValue;
+
+                foreach (var item in primaryPayload.List)
+                {
+                    Console.WriteLine($"Item extracted from the list in the primary payload: {item}");
+                }
+
+                foreach (var item in primaryPayload.Dictionary)
+                {
+                    Console.WriteLine($"Item extracted from the dictionary in the primary payload: key - {item.Key}, value - {item.Value}");
+                }
+
+                foreach (var field in secondaryPayload.Fields)
+                {
+                    Console.WriteLine($"Item extracted from the fields in the secondary payload: key - {field.Key}, value - {field.Value.StringValue}");
+                }
             }
 
             if (!string.IsNullOrWhiteSpace(request.Name))

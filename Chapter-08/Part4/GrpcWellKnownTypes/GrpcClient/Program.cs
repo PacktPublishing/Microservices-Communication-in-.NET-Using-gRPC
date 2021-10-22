@@ -3,6 +3,7 @@ using GrpcServiceApp;
 using Grpc.Net.Client;
 using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
+using System.Collections.Generic;
 
 namespace GrpcClient
 {
@@ -41,21 +42,48 @@ namespace GrpcClient
                         Console.WriteLine("1 - integer");
                         Console.WriteLine("2 - double");
                         Console.WriteLine("3 - boolean");
+                        Console.WriteLine("4 - collection");
 
                         var payloadType = Console.ReadLine();
 
                         Any payload = null;
+                        Value additional_payload = null;
 
                         switch (payloadType)
                         {
                             case "1":
                                 payload = Any.Pack(new IntegerPayload() { Value = 1 });
+                                additional_payload = Value.ForNumber(1);
                                 break;
                             case "2":
                                 payload = Any.Pack(new DoublePayload() { Value = 1.5 });
+                                additional_payload = Value.ForNumber(1.5);
                                 break;
                             case "3":
                                 payload = Any.Pack(new BooleanPayload() { Value = true });
+                                additional_payload = Value.ForBool(true);
+                                break;
+                            case "4":
+
+                                var collection = new List<string> { "item1", "item2", "item3" };
+                                var dictionary = new Dictionary<string, string> { { "1", "item1" }, { "2", "item2" }, { "3", "item3" } };
+
+                                var collectionPayload = new CollectionPayload();
+
+                                collectionPayload.List.Add(collection);
+                                collectionPayload.Dictionary.Add(dictionary);
+
+                                payload = Any.Pack(collectionPayload);
+                                additional_payload = Value.ForStruct(new Struct
+                                {
+                                    Fields =
+                                    {
+                                        ["1"] = Value.ForString("item1"),
+                                        ["2"] = Value.ForString("item2")
+                                    }
+                                });
+                            
+
                                 break;
                             default:
                                 Console.WriteLine("No payload value provided.");
@@ -67,7 +95,8 @@ namespace GrpcClient
                             {
                                 Name = name,
                                 RequestTimeUtc = Timestamp.FromDateTime(DateTime.UtcNow),
-                                Payload = payload
+                                Payload = payload,
+                                AdditionalPayload = additional_payload
                             }, deadline: DateTime.UtcNow.AddMinutes(1));
                         Console.WriteLine("Message: " + reply.Message);
                         Console.WriteLine("Messages processed: " + reply.MessageProcessedCount);

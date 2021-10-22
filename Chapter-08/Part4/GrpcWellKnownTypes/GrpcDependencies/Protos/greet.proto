@@ -5,6 +5,7 @@ import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/any.proto";
+import "google/protobuf/struct.proto";
 
 option csharp_namespace = "GrpcServiceApp";
 
@@ -20,6 +21,7 @@ message HelloRequest {
   string name = 1;
   google.protobuf.Timestamp request_time_utc = 2;
   google.protobuf.Any payload = 3;
+  google.protobuf.Value additional_payload = 4;
 }
 
 message HelloReply {
@@ -50,4 +52,9 @@ message DoublePayload {
 
 message BooleanPayload {
   bool value = 1;
+}
+
+message CollectionPayload {
+    repeated string list = 1;
+    map<string, string> dictionary = 2;
 }
