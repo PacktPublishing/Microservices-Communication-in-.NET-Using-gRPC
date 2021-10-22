@@ -57,7 +57,7 @@ namespace GrpcServiceApp
                     LastNamePresent = request.Name.Split(' ').Length > 1,
                     MessageBytes = Google.Protobuf.ByteString.CopyFrom(messageBytes),
                     ResponseTimeUtc = Timestamp.FromDateTime(currentTime),
-                    CallProcessingDuration = request.RequestTimeUtc - Timestamp.FromDateTime(currentTime)
+                    CallProcessingDuration = Timestamp.FromDateTime(currentTime) - request.RequestTimeUtc
                 });
             }
 
