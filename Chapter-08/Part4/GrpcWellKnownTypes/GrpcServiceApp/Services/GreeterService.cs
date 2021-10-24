@@ -39,6 +39,7 @@ namespace GrpcServiceApp
             {
                 Console.WriteLine($"Extracted the following Boolean value from the payload: {booleanPayload.Value}");
                 Console.WriteLine($"Extracted the following Boolean value from the additional payload: {request.AdditionalPayload.BoolValue}");
+                payloadExtracted = true;
             }
 
             if (!payloadExtracted && request.Payload.Is(CollectionPayload.Descriptor))
