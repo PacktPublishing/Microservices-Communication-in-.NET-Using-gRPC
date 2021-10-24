@@ -47,21 +47,21 @@ namespace GrpcClient
                         var payloadType = Console.ReadLine();
 
                         Any payload = null;
-                        Value additional_payload = null;
+                        Value additionalPayload = null;
 
                         switch (payloadType)
                         {
                             case "1":
                                 payload = Any.Pack(new IntegerPayload() { Value = 1 });
-                                additional_payload = Value.ForNumber(1);
+                                additionalPayload = Value.ForNumber(1);
                                 break;
                             case "2":
                                 payload = Any.Pack(new DoublePayload() { Value = 1.5 });
-                                additional_payload = Value.ForNumber(1.5);
+                                additionalPayload = Value.ForNumber(1.5);
                                 break;
                             case "3":
                                 payload = Any.Pack(new BooleanPayload() { Value = true });
-                                additional_payload = Value.ForBool(true);
+                                additionalPayload = Value.ForBool(true);
                                 break;
                             case "4":
 
@@ -74,7 +74,7 @@ namespace GrpcClient
                                 collectionPayload.Dictionary.Add(dictionary);
 
                                 payload = Any.Pack(collectionPayload);
-                                additional_payload = Value.ForStruct(new Struct
+                                additionalPayload = Value.ForStruct(new Struct
                                 {
                                     Fields =
                                     {
@@ -96,7 +96,7 @@ namespace GrpcClient
                                 Name = name,
                                 RequestTimeUtc = Timestamp.FromDateTime(DateTime.UtcNow),
                                 Payload = payload,
-                                AdditionalPayload = additional_payload
+                                AdditionalPayload = additionalPayload
                             }, deadline: DateTime.UtcNow.AddMinutes(1));
                         Console.WriteLine("Message: " + reply.Message);
                         Console.WriteLine("Messages processed: " + reply.MessageProcessedCount);
