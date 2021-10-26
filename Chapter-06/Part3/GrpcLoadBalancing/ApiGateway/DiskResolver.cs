@@ -22,7 +22,7 @@ namespace ApiGateway
         {
             var addresses = new List<DnsEndPoint>();
 
-            foreach (var line in File.ReadLines(_address.LocalPath))
+            foreach (var line in File.ReadLines(_address.Host))
             {
                 var addresComponents = line.Split(' ');
                 addresses.Add(new DnsEndPoint(addresComponents[0], int.Parse(addresComponents[1])));
