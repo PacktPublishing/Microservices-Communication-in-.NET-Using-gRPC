@@ -1,0 +1,77 @@
+﻿using Microsoft.AspNetCore.Authentication.Certificate;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using UserInfoManager.Services;
+
+namespace UserInfoManager
+{
+    public class Startup
+    {
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddGrpc();
+            services.AddControllers();
+            services.AddSingleton<UserDataCache>();
+            services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
+                    .AddCertificate(options =>
+                    {
+                        options.AllowedCertificateTypes = CertificateTypes.All;
+                        options.Events = new CertificateAuthenticationEvents
+                        {
+                            OnCertificateValidated = context =>
+                            {
+                                var claims = new[]
+                                {
+                                    new Claim(
+                                        ClaimTypes.NameIdentifier,
+                                        context.ClientCertificate.Subject,
+                                        ClaimValueTypes.String,
+                                        context.Options.ClaimsIssuer),
+                                    new Claim(ClaimTypes.Name,
+                                        context.ClientCertificate.Subject,
+                                        ClaimValueTypes.String,
+                                        context.Options.ClaimsIssuer)
+                                };
+
+                                context.Principal = new ClaimsPrincipal(
+                                    new ClaimsIdentity(claims, context.Scheme.Name));
+                                context.Success();
+                                return Task.CompletedTask;
+                            },
+                            OnAuthenticationFailed = context =>
+                            {
+                                context.NoResult();
+                                context.Response.StatusCode = 500;
+                                context.Response.ContentType = "text/plain";
+                                context.Response.WriteAsync(context.Exception.ToString()).Wait();
+                                return Task.CompletedTask;
+                            },
+                        };
+                    })
+                    .AddCertificateCache();
+        }
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseAuthentication();
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGrpcService<UserInfoService>();
+                endpoints.MapControllers();
+            });
+        }
+    }
+}
