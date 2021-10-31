@@ -25,9 +25,9 @@ namespace ApiGateway.Controllers
         public async Task PostDeviceStatus(ClientType clientType, [FromBody] DeviceDetails deviceDetails, [FromQuery] bool async = false)
         {
             if (async)
-                clientWrapper.UpsertDeviceStatus(clientType, deviceDetails);
-            else
                 await clientWrapper.UpsertDeviceStatusAsync(clientType, deviceDetails);
+            else
+                clientWrapper.UpsertDeviceStatus(clientType, deviceDetails);
         }
 
         [HttpPost("")]
