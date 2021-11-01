@@ -104,7 +104,7 @@ namespace GrpcClient
                         Console.WriteLine("Message length in letters: " + reply.MessageLengthInLetters);
                         Console.WriteLine("Milliseconds to deadline: " + reply.MillisecondsToDeadline);
                         Console.WriteLine("Seconds to deadline: " + reply.SecondsToDeadline);
-                        Console.WriteLine("Mintes to deadline: " + reply.MinutesToDeadline);
+                        Console.WriteLine("Minutes to deadline: " + reply.MinutesToDeadline);
                         Console.WriteLine("Last name present: " + reply.LastNamePresent);
                         Console.WriteLine("Message bytes: " + reply.MessageBytes);
                         Console.WriteLine("Call processing duration: " + reply.CallProcessingDuration);

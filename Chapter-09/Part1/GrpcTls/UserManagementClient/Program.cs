@@ -29,7 +29,7 @@ namespace UserManagementClient
                 Console.WriteLine($"Date of birth: {user.DateOfBirth.ToDateTime():yyyy-MM-dd}");
                 Console.WriteLine($"Nationality: {user.Nationality}");
                 Console.WriteLine($"Address: {user.Address.FirstLine}");
-                Console.WriteLine($"Postode or Zip code: {user.Address.PostcodeOrZipCode}");
+                Console.WriteLine($"Postcode or Zip code: {user.Address.PostcodeOrZipCode}");
                 Console.WriteLine($"Town: {user.Address.Town}");
                 Console.WriteLine($"Country: {user.Address.Country}");
                 Console.WriteLine(string.Empty);

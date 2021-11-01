@@ -33,7 +33,6 @@ namespace UserInfoManager.Controllers
                 return Content(await System.IO.File.ReadAllTextAsync(filePath));
 
             return NotFound();
-
         }
     }
 }

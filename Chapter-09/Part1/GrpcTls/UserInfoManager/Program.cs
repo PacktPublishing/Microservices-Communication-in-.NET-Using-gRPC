@@ -17,9 +17,9 @@ namespace UserInfoManager
                     webBuilder.ConfigureKestrel(options =>
                     {
                         options.ListenLocalhost(5002, o => o.Protocols =
-                            HttpProtocols.Http1AndHttp2);
+                            HttpProtocols.Http1);
                         options.ListenLocalhost(5000, o => o.Protocols =
-                            HttpProtocols.Http2);            
+                            HttpProtocols.Http2);         
                     });
                     webBuilder.UseStartup<Startup>();
                 });

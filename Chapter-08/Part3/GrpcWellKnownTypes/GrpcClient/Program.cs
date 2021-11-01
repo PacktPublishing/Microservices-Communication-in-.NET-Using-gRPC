@@ -21,7 +21,7 @@ namespace GrpcClient
 
             while (proceed)
             {
-                Console.WriteLine("Which acion you would like to take?");
+                Console.WriteLine("Which action you would like to take?");
                 Console.WriteLine("1 - get a greeting.");
                 Console.WriteLine("2 - Receive message count");
                 Console.WriteLine("3 - Update message count");
@@ -41,7 +41,7 @@ namespace GrpcClient
                         Console.WriteLine("Message length in letters: " + reply.MessageLengthInLetters);
                         Console.WriteLine("Milliseconds to deadline: " + reply.MillisecondsToDeadline);
                         Console.WriteLine("Seconds to deadline: " + reply.SecondsToDeadline);
-                        Console.WriteLine("Mintes to deadline: " + reply.MinutesToDeadline);
+                        Console.WriteLine("Minutes to deadline: " + reply.MinutesToDeadline);
                         Console.WriteLine("Last name present: " + reply.LastNamePresent);
                         Console.WriteLine("Message bytes: " + reply.MessageBytes);
                         Console.WriteLine("Call processing duration: " + reply.CallProcessingDuration);
