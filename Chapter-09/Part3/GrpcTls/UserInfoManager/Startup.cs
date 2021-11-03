@@ -35,11 +35,6 @@ namespace UserInfoManager
                             {
                                 var claims = new[]
                                 {
-                                    new Claim(
-                                        ClaimTypes.NameIdentifier,
-                                        context.ClientCertificate.Subject,
-                                        ClaimValueTypes.String,
-                                        context.Options.ClaimsIssuer),
                                     new Claim(ClaimTypes.Name,
                                         context.ClientCertificate.Subject,
                                         ClaimValueTypes.String,
