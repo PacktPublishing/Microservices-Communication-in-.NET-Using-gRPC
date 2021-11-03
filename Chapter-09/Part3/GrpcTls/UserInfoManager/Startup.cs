@@ -4,7 +4,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Net;
 using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using UserInfoManager.Services;
 
@@ -17,6 +20,11 @@ namespace UserInfoManager
             services.AddGrpc();
             services.AddControllers();
             services.AddSingleton<UserDataCache>();
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = (int)HttpStatusCode.PermanentRedirect;
+                options.HttpsPort = 5001;
+            });
             services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
                     .AddCertificate(options =>
                     {
@@ -40,13 +48,15 @@ namespace UserInfoManager
 
                                 context.Principal = new ClaimsPrincipal(
                                     new ClaimsIdentity(claims, context.Scheme.Name));
+
+                                Console.WriteLine($"Client certificate subject: {context.ClientCertificate.Subject}");
                                 context.Success();
                                 return Task.CompletedTask;
                             },
                             OnAuthenticationFailed = context =>
                             {
                                 context.NoResult();
-                                context.Response.StatusCode = 500;
+                                context.Response.StatusCode = 403;
                                 context.Response.ContentType = "text/plain";
                                 context.Response.WriteAsync(context.Exception.ToString()).Wait();
                                 return Task.CompletedTask;
@@ -64,7 +74,7 @@ namespace UserInfoManager
             }
 
             app.UseAuthentication();
-
+            app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

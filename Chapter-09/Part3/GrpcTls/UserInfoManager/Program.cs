@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 using Microsoft.Extensions.Hosting;
+using System.Security.Cryptography.X509Certificates;
 
 namespace UserInfoManager
 {
@@ -16,11 +17,19 @@ namespace UserInfoManager
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.ConfigureKestrel(o =>
+                    webBuilder.ConfigureKestrel(options =>
                     {
-                        o.ConfigureHttpsDefaults(o =>
-                            o.ClientCertificateMode = ClientCertificateMode.RequireCertificate
-                        );
+                        options.ConfigureHttpsDefaults(o =>
+                        {
+                            o.ServerCertificate =
+                                new X509Certificate2("UserInfoManager.pfx", "password");
+                            o.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+                        });
+                        options.ListenLocalhost(5002, o => o.Protocols =
+                            HttpProtocols.Http1);
+                        options.ListenLocalhost(5000, o => o.Protocols =
+                            HttpProtocols.Http2);
+                        options.ListenAnyIP(5001, o => o.UseHttps());
                     });
                 });
     }

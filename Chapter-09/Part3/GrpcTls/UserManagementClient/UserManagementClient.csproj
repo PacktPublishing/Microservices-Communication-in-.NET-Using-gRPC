@@ -20,4 +20,10 @@
     </Protobuf>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="UserManagementClient.pfx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

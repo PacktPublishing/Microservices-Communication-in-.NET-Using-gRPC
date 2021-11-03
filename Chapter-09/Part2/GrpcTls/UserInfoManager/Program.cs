@@ -17,17 +17,16 @@ namespace UserInfoManager
                 {
                     webBuilder.ConfigureKestrel(options =>
                     {
+                        options.ConfigureHttpsDefaults(o =>
+                        {
+                            o.ServerCertificate =
+                                new X509Certificate2("UserInfoManager.pfx", "password");
+                        });
                         options.ListenLocalhost(5002, o => o.Protocols =
                             HttpProtocols.Http1);
                         options.ListenLocalhost(5000, o => o.Protocols =
                             HttpProtocols.Http2);
                         options.ListenAnyIP(5001, o => o.UseHttps());
-
-                        options.ConfigureHttpsDefaults(o =>
-                        {
-                            o.ServerCertificate = 
-                                new X509Certificate2("UserInfoManager.pfx", "password");
-                        });
                     });
                     webBuilder.UseStartup<Startup>();
                 });

@@ -17,7 +17,7 @@ namespace UserManagementClient
             Console.WriteLine("Please enter the gRPC service URL.");
             var url = Console.ReadLine();
 
-            var certificate = new X509Certificate2("dev.pfx", "12345");
+            var certificate = new X509Certificate2("UserManagementClient.pfx", "password");
             var handler = new HttpClientHandler();
             handler.ClientCertificates.Add(certificate);
 
