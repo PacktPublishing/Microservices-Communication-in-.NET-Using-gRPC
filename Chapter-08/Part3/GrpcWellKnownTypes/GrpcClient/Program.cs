@@ -21,10 +21,10 @@ namespace GrpcClient
 
             while (proceed)
             {
-                Console.WriteLine("Which action you would like to take?");
-                Console.WriteLine("1 - get a greeting.");
-                Console.WriteLine("2 - Receive message count");
-                Console.WriteLine("3 - Update message count");
+                Console.WriteLine("Which action would you like to take?");
+                Console.WriteLine("1 – Get a greeting");
+                Console.WriteLine("2 – Receive message count");
+                Console.WriteLine("3 – Update message count");
 
                 var action = Console.ReadLine();
 
