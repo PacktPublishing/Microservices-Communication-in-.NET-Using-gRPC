@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Net;
 using System.Security.Claims;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using UserInfoManager.Services;
 
