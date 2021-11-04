@@ -44,6 +44,7 @@ namespace UserInfoManager
                                 context.Principal = new ClaimsPrincipal(
                                     new ClaimsIdentity(claims, context.Scheme.Name));
 
+                                Console.WriteLine($"Client certificate thumbprint: {context.ClientCertificate.Thumbprint}");
                                 Console.WriteLine($"Client certificate subject: {context.ClientCertificate.Subject}");
                                 context.Success();
                                 return Task.CompletedTask;
