@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using UserFacingApp.Models;
@@ -18,9 +18,20 @@ namespace UserFacingApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            Console.WriteLine($"Access token: {accessToken}");
             return View();
+        }
+
+        public IActionResult LogOut()
+        {
+            return new SignOutResult(new[]
+            {
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                "oidc"
+            });
         }
 
         public IActionResult Privacy()

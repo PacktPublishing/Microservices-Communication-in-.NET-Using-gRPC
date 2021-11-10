@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Please enter the id of the secret you want to view:</h1>
+    <form asp-action="Details" method="get">
+        <p>
+            <input type="text" name="Id" />
+            <input type="submit" value="Submit" />
+        </p>
+    </form>
+</div>
