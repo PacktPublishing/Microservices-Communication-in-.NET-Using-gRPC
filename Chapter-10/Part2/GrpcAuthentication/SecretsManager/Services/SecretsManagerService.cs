@@ -18,8 +18,6 @@ namespace SecretsManager
 
         public override Task<GetSecretResponse> GetSecret(GetSecretRequest request, ServerCallContext context)
         {
-            Console.WriteLine($"Peer identity: {context.AuthContext.PeerIdentityPropertyName}");
-
             var secret = secretsCache.GetSecret(request.Id);
 
             if (secret is not null)

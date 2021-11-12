@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using UserFacingApp.Models;
 
 namespace UserFacingApp.Controllers
@@ -39,7 +36,7 @@ namespace UserFacingApp.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var secretDetails = await this.clientWrapper.GetSecret(id, accessToken);
+            var secretDetails = await clientWrapper.GetSecret(id, accessToken);
             return View(secretDetails);
         }
 

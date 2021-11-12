@@ -46,7 +46,7 @@ namespace SecretsManager
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<SecretsManagerService>()
-                .RequireAuthorization("GrpcAuth"); ;
+                .RequireAuthorization("GrpcAuth");
 
                 endpoints.MapGet("/", async context =>
                 {
