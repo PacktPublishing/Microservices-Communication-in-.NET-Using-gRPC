@@ -15,16 +15,13 @@ namespace AuthProvider
     {
         private readonly IUserClaimsPrincipalFactory<ApplicationUser> claimsFactory;
         private readonly UserManager<ApplicationUser> usersManager;
-        private readonly RoleManager<IdentityRole> rolesManager;
 
         public UserProfileService(
             UserManager<ApplicationUser> usersManager,
-            IUserClaimsPrincipalFactory<ApplicationUser> claimsFactory,
-            RoleManager<IdentityRole> rolesManager)
+            IUserClaimsPrincipalFactory<ApplicationUser> claimsFactory)
         {
             this.usersManager = usersManager;
             this.claimsFactory = claimsFactory;
-            this.rolesManager = rolesManager;
         }
 
         public async Task GetProfileDataAsync(ProfileDataRequestContext context)
@@ -38,14 +35,9 @@ namespace AuthProvider
 
             if (usersManager.SupportsUserRole)
             {
-                foreach (var role in rolesManager.Roles)
+                foreach (var roleName in await usersManager.GetRolesAsync(user))
                 {
-                    claimsList.Add(new Claim(JwtClaimTypes.Role, role.Name));
-
-                    if (rolesManager.SupportsRoleClaims)
-                    {
-                        claimsList.AddRange(await rolesManager.GetClaimsAsync(role));
-                    }
+                    claimsList.Add(new Claim(JwtClaimTypes.Role, roleName));
                 }
 
             }
