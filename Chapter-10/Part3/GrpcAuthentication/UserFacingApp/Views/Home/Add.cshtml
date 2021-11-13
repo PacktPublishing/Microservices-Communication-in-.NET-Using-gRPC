@@ -1,0 +1,18 @@
+﻿@model UserFacingApp.Models.SecretDetails 
+
+@{
+    ViewData["Title"] = "Add New Secret";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-controller="Home" asp-action="Add" method="post">
+    Title:  <input asp-for="Title" /> <br />
+    Description: <input asp-for="Description" /><br />
+    Description: <select data-val="true" id="SecretLevel" name="SecretLevel">
+        <option value="Restricted">Restricted</option>
+        <option value="Secret">Secret</option>
+        <option value="TopSecret">Top Secret</option>
+    </select><br />
+    <button type="submit">Submit</button>
+</form>
