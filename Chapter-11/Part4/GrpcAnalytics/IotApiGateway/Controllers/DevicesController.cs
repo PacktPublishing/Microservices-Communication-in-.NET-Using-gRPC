@@ -36,7 +36,7 @@ namespace IotApiGateway.Controllers
 
             foreach (var trailer in call.GetTrailers())
             {
-                logger.LogDebug($"gRPC trailer receuved. Key: {trailer.Key}. Value: {trailer.Value}");
+                logger.LogDebug($"gRPC trailer received. Key: {trailer.Key}. Value: {trailer.Value}");
             }
 
             return response;
