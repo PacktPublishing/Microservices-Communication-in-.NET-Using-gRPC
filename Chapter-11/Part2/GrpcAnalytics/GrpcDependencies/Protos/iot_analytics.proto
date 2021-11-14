@@ -1,0 +1,21 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+package iot_analytics;
+
+service IotStatusManager {
+	rpc GetAllStatuses (google.protobuf.Empty) returns (stream LocationStatusResponse);
+	rpc GetLocationStatus (LocationStatusRequest) returns (LocationStatusResponse);
+}
+
+message LocationStatusRequest {
+	int32 location_id = 1;
+}
+
+message LocationStatusResponse {
+	int32 location_id = 1;
+	string location_name = 2;
+	string device_serial_number = 3;
+	int64 total_requests = 4;
+	int64 total_errors = 5;
+}
