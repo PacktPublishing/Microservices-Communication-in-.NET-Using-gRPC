@@ -16,7 +16,7 @@ namespace IotDeviceManager
         {
             services.AddGrpc(options =>
             {
-                options.EnableDetailedErrors = isDevelopment;
+                options.EnableDetailedErrors = false; // isDevelopment;
             });
             services.AddSingleton<LocationDataCache>();
         }

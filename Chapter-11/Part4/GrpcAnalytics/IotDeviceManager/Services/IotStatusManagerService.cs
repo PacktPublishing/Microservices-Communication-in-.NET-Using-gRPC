@@ -1,6 +1,7 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using IotAnalytics;
+using System;
 using System.Threading.Tasks;
 
 namespace IotDeviceManager.Services
@@ -20,6 +21,11 @@ namespace IotDeviceManager.Services
             {
                 await responseStream.WriteAsync(status);
             }
+        }
+
+        public override Task<LocationStatusResponse> GetLocationStatus(LocationStatusRequest request, ServerCallContext context)
+        {
+            throw new Exception("This call is not ready yet.");
         }
     }
 }

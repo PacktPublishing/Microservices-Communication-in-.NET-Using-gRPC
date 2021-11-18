@@ -2,6 +2,7 @@
 using Grpc.Core.Interceptors;
 using Microsoft.Extensions.Logging;
 using Prometheus;
+using System.Threading.Tasks;
 
 namespace IotApiGateway
 {
@@ -37,7 +38,7 @@ namespace IotApiGateway
             try
             {
                 using (GrpcCallDuration.NewTimer())
-                    return base.BlockingUnaryCall(request, context, continuation);
+                    return continuation(request, context);
             }
             catch (RpcException ex)
             {
@@ -47,37 +48,28 @@ namespace IotApiGateway
         }
 
         public override AsyncUnaryCall<TResponse> AsyncUnaryCall<TRequest, TResponse>(TRequest request, ClientInterceptorContext<TRequest, TResponse> context, AsyncUnaryCallContinuation<TRequest, TResponse> continuation)
-        {       
+        {
             LogCall(context.Method);
             AsyncUnaryCallsCount.Inc();
-
-            try
-            {
-                using (GrpcCallDuration.NewTimer())
-                    return base.AsyncUnaryCall(request, context, continuation);
-            }
-            catch (RpcException ex)
-            {
-                LogException(ex);
-                throw;
-            }
+            var call = continuation(request, context);
+            using (GrpcCallDuration.NewTimer())
+                return new AsyncUnaryCall<TResponse>(HandleCallResponse(call.ResponseAsync), call.ResponseHeadersAsync, call.GetStatus, call.GetTrailers, call.Dispose);
         }
 
         public override AsyncClientStreamingCall<TRequest, TResponse> AsyncClientStreamingCall<TRequest, TResponse>(ClientInterceptorContext<TRequest, TResponse> context, AsyncClientStreamingCallContinuation<TRequest, TResponse> continuation)
         {
             LogCall(context.Method);
             ClientStreamingCallsCount.Inc();
+            var call = continuation(context);
 
-            try
-            {
-                using (GrpcCallDuration.NewTimer())
-                    return base.AsyncClientStreamingCall(context, continuation);
-            }
-            catch (RpcException ex)
-            {
-                LogException(ex);
-                throw;
-            }
+            using (GrpcCallDuration.NewTimer())
+                return new AsyncClientStreamingCall<TRequest, TResponse>(
+                    call.RequestStream,
+                    HandleCallResponse(call.ResponseAsync),
+                    call.ResponseHeadersAsync,
+                    call.GetStatus,
+                    call.GetTrailers,
+                    call.Dispose);
         }
 
         public override AsyncServerStreamingCall<TResponse> AsyncServerStreamingCall<TRequest, TResponse>(TRequest request, ClientInterceptorContext<TRequest, TResponse> context, AsyncServerStreamingCallContinuation<TRequest, TResponse> continuation)
@@ -88,7 +80,7 @@ namespace IotApiGateway
             try
             {
                 using (GrpcCallDuration.NewTimer())
-                    return base.AsyncServerStreamingCall(request, context, continuation);
+                    return continuation(request, context);
             }
             catch (RpcException ex)
             {
@@ -105,7 +97,21 @@ namespace IotApiGateway
             try
             {
                 using (GrpcCallDuration.NewTimer())
-                    return base.AsyncDuplexStreamingCall(context, continuation);
+                    return continuation(context);
+            }
+            catch (RpcException ex)
+            {
+                LogException(ex);
+                throw;
+            }
+        }
+
+        private async Task<TResponse> HandleCallResponse<TResponse>(Task<TResponse> responseTask)
+        {
+            try
+            {
+                var response = await responseTask;
+                return response;
             }
             catch (RpcException ex)
             {
