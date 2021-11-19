@@ -32,6 +32,7 @@ namespace IotApiGateway
                 options.Address = new Uri("https://localhost:5001");
             })
             .AddInterceptor<TracingInterceptor>();
+            services.AddSingleton<TracingInterceptor>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

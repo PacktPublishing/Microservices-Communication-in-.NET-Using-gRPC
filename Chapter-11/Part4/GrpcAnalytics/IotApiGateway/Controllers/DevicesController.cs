@@ -32,13 +32,6 @@ namespace IotApiGateway.Controllers
                 response.Add(call.ResponseStream.Current);
             }
 
-            var logger = loggerFactory.CreateLogger<DevicesController>();
-
-            foreach (var trailer in call.GetTrailers())
-            {
-                logger.LogDebug($"gRPC trailer received. Key: {trailer.Key}. Value: {trailer.Value}");
-            }
-
             return response;
         }
 

@@ -19,6 +19,7 @@ namespace IotDeviceManager
                 options.EnableDetailedErrors = isDevelopment;
                 options.Interceptors.Add<ServerTracingInterceptor>();
             });
+			services.AddSingleton<ServerTracingInterceptor>();
             services.AddSingleton<LocationDataCache>();
         }
 
