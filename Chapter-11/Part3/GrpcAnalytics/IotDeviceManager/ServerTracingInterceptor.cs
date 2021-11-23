@@ -82,7 +82,7 @@ namespace IotDeviceManager
 
         private void LogException(Exception ex)
         {
-            logger.LogError(ex, "gRPC error occured");
+            logger.LogError(ex, "gRPC error occurred");
         }
     }
 }

@@ -127,7 +127,7 @@ namespace IotApiGateway
 
         private void LogException(RpcException ex)
         {
-            logger.LogError(ex, "gRPC error occured");
+            logger.LogError(ex, "gRPC error occurred");
             FailedGrpcCallsCount.Inc();
         }
     }
