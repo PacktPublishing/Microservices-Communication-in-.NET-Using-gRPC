@@ -116,7 +116,7 @@ namespace ApiGateway
             {
                 Credentials = ChannelCredentials.SecureSsl,
                 ServiceProvider = serviceProvider,
-                ServiceConfig = new ServiceConfig { LoadBalancingConfigs = { new LoadBalancingConfig("random") } }
+                ServiceConfig = new ServiceConfig { LoadBalancingConfigs = { new LoadBalancingConfig("randomized") } }
             });
             var client = new Ingestor.IngestorClient(channel);
 
