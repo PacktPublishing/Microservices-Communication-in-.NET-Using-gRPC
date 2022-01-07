@@ -17,7 +17,7 @@ This book covers the following exciting features:
 * Secure gRPC communication inside a .NET application
 * Discover how to monitor gRPC on .NET by applying logging and metrics
 
-If you feel this book is for you, get your [copy](https://www.amazon.com/dp/B09MV536LY) today!
+If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1803236434) today!
 
 <a href="https://www.packtpub.com/?utm_source=github&utm_medium=banner&utm_campaign=GitHubBanner"><img src="https://raw.githubusercontent.com/PacktPublishing/GitHub/master/GitHub.png" 
 alt="https://www.packtpub.com/" border="5" /></a>
