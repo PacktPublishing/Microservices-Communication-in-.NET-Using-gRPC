@@ -62,3 +62,7 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 ## Get to Know the Author
 **Fiodar Sazanavets**
 is an experienced lead software developer. His main areas of expertise are ASP.NET, SQL Server, Azure, Docker, Internet of Things, microservices architecture, and various frontend technologies. Fiodar built his software engineering experience while working in a variety of industries, including water engineering, financial, railway, and defense. He has played a leading role in various projects and, as well as writing software, his duties have included performing architectural tasks. Fiodar is passionate about teaching other people programming skills. He has published a number of programming courses on various online platforms. Fiodar regularly writes about software development on his personal website, scientificprogrammer.net.	
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781803236438">https://packt.link/free-ebook/9781803236438 </a> </p>
